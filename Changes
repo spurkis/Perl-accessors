@@ -3,6 +3,10 @@ Revision history for 'accessors' Perl pragma
 
 All changes by Steve Purkis, unless otherwise noted.
 
+1.01
+    +	only run benchmark tests when $ENV{BENCHMARK_ACCESSORS} is set.
+	(tests were failing randomly, and annoying lots of people)
+
 1.00
     +	released as 1.0 to solidify the API & guarantee backwards compat
     +	fixed RT #29753: Suppress warnings in "make test"

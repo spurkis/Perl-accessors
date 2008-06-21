@@ -23,8 +23,9 @@ is( $foo->baz( 2 ), 2,         'set foo->baz' );
 is( $foo->bar, 'set',          'get foo->bar' );
 
 SKIP: {
+    skip '$ENV{BENCHMARK_ACCESSORS} not set', 6 unless ($ENV{BENCHMARK_ACCESSORS});
     eval "use Benchmark qw( timestr countit )"; # ya never know...
-    skip 'Benchmark.pm not installed!', 3 if ($@);
+    skip 'Benchmark.pm not installed!', 6 if ($@);
     eval "use t::Benchmark";
     die $@ if $@;
 

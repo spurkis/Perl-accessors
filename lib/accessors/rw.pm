@@ -22,7 +22,7 @@ use strict;
 use warnings::register;
 use base qw( accessors::classic );
 
-our $VERSION  = '1.00';
+our $VERSION  = '1.01';
 our $REVISION = (split(/ /, ' $Revision: 1.3 $ '))[2];
 
 use constant style => 'rw';
