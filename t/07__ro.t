@@ -7,7 +7,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 13;
+use Test::More tests => 14;
 use Carp;
 
 BEGIN { use_ok( "accessors::ro" ) };
@@ -23,6 +23,12 @@ is( $foo->bar, 'read only', 'get foo->bar' );
 is( $foo->baz, undef,       'get foo->baz' );
 $foo->{baz} = 'set';
 is( $foo->baz, 'set',       'get foo->baz' );
+
+eval {
+    my $class = 'Foo';
+    $class->bar;
+};
+isnt( $@, '', 'class accessor is an error' );
 
 SKIP: {
     skip '$ENV{BENCHMARK_ACCESSORS} not set', 6 unless ($ENV{BENCHMARK_ACCESSORS});

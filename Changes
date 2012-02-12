@@ -3,6 +3,12 @@ Revision history for 'accessors' Perl pragma
 
 All changes by Steve Purkis, unless otherwise noted.
 
+1.02
+    *	fixed bug: Prohibit "class accessors" RT #73138 [patch by Slaven Rezić]
+	calling class accessors will now throw an exception.
+    +	moved repo to github: git://github.com/spurkis/Perl-accessors.git
+    +	fixed spelling errors in pod: RT #71663 [patch by Salvatore Bonaccorso]
+
 1.01
     +	only run benchmark tests when $ENV{BENCHMARK_ACCESSORS} is set.
 	(tests were failing randomly, and annoying lots of people)

@@ -28,7 +28,7 @@ use strict;
 use warnings::register;
 use base qw( accessors );
 
-our $VERSION  = '1.01';
+our $VERSION  = '1.02';
 our $REVISION = (split(/ /, ' $Revision: 1.4 $ '))[2];
 
 use constant style => 'ro';
@@ -37,8 +37,9 @@ sub create_accessor {
     my ($class, $accessor, $property) = @_;
     # get is slightly faster if we eval instead of using a closure + anon
     # sub, but the difference is marginal (~5%), and this uses less memory...
+    my $sub = sub { return $_[0]->{$property} };
     no strict 'refs';
-    *{$accessor} = sub { return $_[0]->{$property} };
+    *{$accessor} = $sub;
 }
 
 1;

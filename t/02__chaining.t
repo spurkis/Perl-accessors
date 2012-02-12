@@ -7,7 +7,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 12;
+use Test::More tests => 13;
 use Carp;
 
 BEGIN { use_ok( "accessors::chained" ) };
@@ -21,6 +21,12 @@ can_ok( $foo, 'baz' );
 is( $foo->bar( 'set' )->baz( 2 ), $foo, 'set foo->bar->baz' );
 is( $foo->bar, 'set',   'get foo->bar' );
 is( $foo->baz, '2',     'get foo->baz' );
+
+eval {
+    my $class = 'Foo';
+    $class->bar( 'set' )->baz( 2 );
+};
+isnt( $@, '', 'class accessor is an error' );
 
 SKIP: {
     skip '$ENV{BENCHMARK_ACCESSORS} not set', 6 unless ($ENV{BENCHMARK_ACCESSORS});

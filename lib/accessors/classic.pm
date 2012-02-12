@@ -22,7 +22,7 @@ use strict;
 use warnings::register;
 use base qw( accessors );
 
-our $VERSION  = '1.01';
+our $VERSION  = '1.02';
 our $REVISION = (split(/ /, ' $Revision: 1.5 $ '))[2];
 
 use constant style => 'classic';
@@ -31,10 +31,11 @@ sub create_accessor {
     my ($class, $accessor, $property) = @_;
     # set/get is slightly faster if we eval instead of using a closure + anon
     # sub, but the difference is marginal (~5%), and this uses less memory...
-    no strict 'refs';
-    *{$accessor} = sub {
+    my $sub = sub {
 	(@_ > 1) ? $_[0]->{$property} = $_[1] : $_[0]->{$property};
-    }
+    };
+    no strict 'refs';
+    *{$accessor} = $sub;
 }
 
 1;
@@ -57,7 +58,7 @@ The generated methods look like this:
 They I<always> return the current value.
 
 Note that there is I<no> dash (C<->) prepended to the property name as there
-are in L<accessors>.  This is for backwards compatability.
+are in L<accessors>.  This is for backwards compatibility.
 
 =head1 PERFORMANCE
 
