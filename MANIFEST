@@ -20,3 +20,4 @@ t/06__rw.t
 t/07__ro.t
 t/Benchmark.pm
 TODO
+META.json
